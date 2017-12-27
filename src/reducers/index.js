@@ -2,13 +2,9 @@ import * as types from '../constants/actionTypes';
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case types.INITIALIZE_WORM:
+    case types.INITIALIZE_APP:
       return {
-        ...state, ...{ worm: { ...state.worm, ...{ parts: action.parts, direction: action.direction } } }
-      };
-    case types.INITIALIZE_BITE:
-      return {
-        ...state, ...{ bite: { ...state.bite, ...{ point: action.point } } }
+        ...state, ...{ ...action.store }
       };
     case types.MOVE_WORM:
       const sw = state.worm;

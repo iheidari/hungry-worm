@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Part from './Part';
-import { initWorm, moveWorm } from '../actions/wormActions';
+import { moveWorm } from '../actions/wormActions';
 
 class Worm extends Component {
   constructor(props) {
     super(props);
-    props.dispatch(initWorm());
     this.state = { moveCounter: props.speed };
     this.moveWorm = this.moveWorm.bind(this);
   }
@@ -48,7 +47,8 @@ class Worm extends Component {
 const mapStateToProps = (state) => {
   return {
     parts: state.worm && state.worm.parts,
-    speed: (state.worm && state.worm.speed) || 20
+    speed: (state.worm && state.worm.speed)
   };
 }
+
 export default connect(mapStateToProps)(Worm);

@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Worm from './Worm';
-import Bite from './Bite';
+import Bait from './Bait';
 import { changeDirection } from '../actions/wormActions';
 
 class Board extends Component {
   constructor() {
     super();
-    //this.keyPressed = this.keyPressed.bind(this);
     document.onkeypress = this.keyPressed.bind(this);
   }
 
   keyPressed(evt) {
-    console.log(this)
     const disp = this.props.dispatch;
     evt = evt || window.event;
     switch (evt.keyCode) {
@@ -39,7 +37,7 @@ class Board extends Component {
     return (
       <div className="board">
         <Worm />
-        <Bite />
+        <Bait />
       </div>
     )
   }

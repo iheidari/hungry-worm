@@ -1,20 +1,20 @@
 import * as types from '../constants/actionTypes';
 
-export const initWorm = () => {
-  //TODO: Random start
-  //let direction = Math.random();
-  //let startPoint = Math.random();
+export const initApp = () => {
   return {
-    type: types.INITIALIZE_WORM,
-    parts: [{ x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 }],
-    direction: { x: 1, y: 0 },
+    type: types.INITIALIZE_APP,
+    store: {
+      worm: {
+        parts: [{ x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 }],
+        direction: { x: 1, y: 0 },
+        speed: 20
+      },
+      bait: { point: { x: 10, y: 10 } }
+    }
   };
-};
+}
 
 export const moveWorm = () => {
-  //TODO: Random start
-  //let direction = Math.random();
-  //let startPoint = Math.random();
   return {
     type: types.MOVE_WORM,
   };
@@ -42,14 +42,4 @@ export const changeDirection = (dir) => {
       break;
   }
   return toRet;
-};
-
-
-
-export const initBite = () => {
-  //TODO: Random start
-  return {
-    type: types.INITIALIZE_BITE,
-    point: { x: 10, y: 10 },
-  };
 };
