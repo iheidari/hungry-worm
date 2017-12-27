@@ -32,13 +32,12 @@ class Board extends Component {
     }
   }
   changeDir(dir) {
-    console.log(dir);
     this.props.dispatch(changeDirection(dir));
   }
   render() {
     //const p = this.props;
     return (
-      <div className="board" onKeyDown={this.keyPressed}>
+      <div className="board">
         <Worm />
         <Bite />
       </div>

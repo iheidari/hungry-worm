@@ -7,7 +7,6 @@ export const initWorm = () => {
   return {
     type: types.INITIALIZE_WORM,
     parts: [{ x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 }],
-    next: { x: 6, y: 3 },
     direction: { x: 1, y: 0 },
   };
 };

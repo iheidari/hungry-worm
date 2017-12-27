@@ -4,7 +4,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case types.INITIALIZE_WORM:
       return {
-        ...state, ...{ worm: { ...state.worm, ...{ parts: action.parts, next: action.next, direction: action.direction } } }
+        ...state, ...{ worm: { ...state.worm, ...{ parts: action.parts, direction: action.direction } } }
       };
     case types.INITIALIZE_BITE:
       return {
@@ -13,19 +13,18 @@ export default (state = {}, action) => {
     case types.MOVE_WORM:
       const sw = state.worm;
       let oldParts = sw.parts;
-      let oldNext = sw.next;
       let newParts = oldParts.map((p, i) => {
         if (i === oldParts.length - 1) {
-          return oldNext;
+          const t = oldParts[oldParts.length - 1];
+          return { x: t.x + sw.direction.x, y: t.y + sw.direction.y };
         }
         else {
           return oldParts[i + 1];
         }
       });
-      let newNext = { x: oldNext.x + sw.direction.x, y: oldNext.y + sw.direction.y }
 
       return {
-        ...state, ...{ worm: { ...sw, ...{ parts: newParts, next: newNext } } }
+        ...state, ...{ worm: { ...sw, ...{ parts: newParts } } }
       };
     case types.CHANGE_DIRECTION:
       return {
