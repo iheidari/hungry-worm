@@ -1,3 +1,4 @@
 export const INITIALIZE_APP = 'INITIALIZE_APP';
 export const MOVE_WORM = 'MOVE_WORM';
+export const CHECK_EATING = 'CHECK_EATING';
 export const CHANGE_DIRECTION = 'CHANGE_DIRECTION';

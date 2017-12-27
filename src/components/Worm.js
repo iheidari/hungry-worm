@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Part from './Part';
-import { moveWorm } from '../actions/wormActions';
+import { moveWorm, checkEating } from '../actions/wormActions';
 
 class Worm extends Component {
   constructor(props) {
@@ -27,7 +27,8 @@ class Worm extends Component {
     const p = this.props;
     if (s.moveCounter === 0) {
       this.setState({ moveCounter: p.speed });
-      p.dispatch(moveWorm())
+      p.dispatch(moveWorm());
+      p.dispatch(checkEating());
     }
     this.setState({ moveCounter: this.state.moveCounter - 1 });
   }
@@ -35,7 +36,7 @@ class Worm extends Component {
     const p = this.props;
     if (!p.parts) return null;
     let wormParts = p.parts.map((part, index) => {
-      return (<Part id={'id' + index} x={part.x} y={part.y} key={index} />);
+      return (<Part id={'id' + index} x={part.x} y={part.y} size={p.size} key={index} />);
     });
     return (
       <div>
@@ -46,6 +47,7 @@ class Worm extends Component {
 }
 const mapStateToProps = (state) => {
   return {
+    size: state.board && state.board.cellSize,
     parts: state.worm && state.worm.parts,
     speed: (state.worm && state.worm.speed)
   };
