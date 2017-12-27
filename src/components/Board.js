@@ -33,9 +33,9 @@ class Board extends Component {
     this.props.dispatch(changeDirection(dir));
   }
   render() {
-    //const p = this.props;
+    const p = this.props;
     return (
-      <div className="board">
+      <div className="board" style={{ width: p.width, height: p.height }}>
         <Worm />
         <Bait />
       </div>
@@ -45,7 +45,8 @@ class Board extends Component {
 
 const mapStateToProps = (state) => {
   return {
-
+    width: state.board && state.board.width * state.board.cellSize,
+    height: state.board && state.board.height * state.board.cellSize
   }
 }
 export default connect(mapStateToProps)(Board)

@@ -8,7 +8,7 @@ class Bait extends Component {
     if(!p.point) return null;
     return (
       <div>
-        <Part x={p.point.x} y={p.point.y} />
+        <Part x={p.point.x} y={p.point.y} size={p.size}/>
       </div>
     );
   }
@@ -16,6 +16,7 @@ class Bait extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    size: state.board && state.board.cellSize,
     point: state.bait && state.bait.point,
   };
 }
