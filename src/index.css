@@ -9,9 +9,12 @@ body {
   justify-content: center;
 }
 .board {
-  margin-top: 10%;
-  width: 40em;
-  height: 40em;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   background-color: lightblue;
 }
 .board div {
