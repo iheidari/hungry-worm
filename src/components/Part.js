@@ -1,14 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 class Part extends React.Component {
   render() {
     const size = 10;
     const divStyle = {
-      left: size * this.props.x + 'px',
-      top: size * this.props.y + 'px',
+      left: size * this.props.x ,
+      top: size * this.props.y ,
       width: size,
       height: size,
-      position: 'relative',
       background: 'blueviolet'
     };
     return (
@@ -16,11 +14,4 @@ class Part extends React.Component {
     );
   };
 }
-
-function mapStateToProps(state) {
-  return {
-    moveX: state.x,
-    moveY: state.y,
-  }
-}
-export default connect(mapStateToProps, null)(Part);
+export default Part;
