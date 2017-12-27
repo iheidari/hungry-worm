@@ -10,7 +10,11 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const sagaMiddleware = createSagaMiddleware(sagaControler);
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(sagaMiddleware)
+);
 sagaMiddleware.run(sagaControler);
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
