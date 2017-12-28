@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Worm from './Worm';
 import Bait from './Bait';
+import Header from './Header';
 import { changeDirection } from '../actions/wormActions';
 
 class Board extends Component {
@@ -36,6 +37,7 @@ class Board extends Component {
     const p = this.props;
     return (
       <div className="board" style={{ width: p.width, height: p.height }}>
+        <Header width={p.width} />
         <Worm />
         <Bait />
       </div>
