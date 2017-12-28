@@ -4,33 +4,33 @@ import Part from './Part';
 import { moveWorm, checkEating } from '../actions/wormActions';
 
 class Worm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { moveCounter: props.speed };
+  constructor() {
+    super();
     this.moveWorm = this.moveWorm.bind(this);
   }
   componentDidMount() {
-    setInterval(this.moveWorm, 100);
+    this.setState({ intervalID: setInterval(this.moveWorm, this.props.speed) });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     //only update in case of props change
     //no need to render for this.state.moveCounter changes
+    if (nextProps.speed !== this.props.speed) {
+      clearInterval(this.state.intervalID);
+      this.setState({ intervalID: setInterval(this.moveWorm, this.props.speed) });
+    }
     if (nextProps !== this.props)
       return true;
     else
       return false;
+
+
   }
 
   moveWorm() {
-    const s = this.state;
     const p = this.props;
-    if (s.moveCounter === 0) {
-      this.setState({ moveCounter: p.speed });
-      p.dispatch(moveWorm());
-      p.dispatch(checkEating());
-    }
-    this.setState({ moveCounter: this.state.moveCounter - 1 });
+    p.dispatch(moveWorm());
+    p.dispatch(checkEating());
   }
   render() {
     const p = this.props;

@@ -18,7 +18,8 @@ export default (state = {}, action) => {
           return oldParts[i + 1];
         }
       });
-
+      if (sw.length > oldParts.length)
+        newParts = [oldParts[0], ...newParts];
       return {
         ...state, ...{ worm: { ...sw, ...{ parts: newParts } } }
       };
@@ -29,17 +30,18 @@ export default (state = {}, action) => {
     case types.CHECK_EATING:
       const worm = state.worm;
       const bait = state.bait;
-      const {width, height} = {...state.board};
+      const { width, height } = { ...state.board };
       const wormHead = worm.parts[worm.parts.length - 1];
-      if (wormHead.x === bait.point.x && wormHead.y === bait.point.y) {
-        let eaten = worm.eaten + 1;
+      if (wormHead.x === bait.x && wormHead.y === bait.y) {
+        let length = worm.length + 1;
+        let speed = Math.round(worm.speed * 0.9);
         const x = Math.round(Math.random() * width);
         const y = Math.round(Math.random() * height);
-        let newBait = { x, y };
+
         return {
           ...state,
-          ...{ worm: { ...state.worm, ...{ eaten } } },
-          ...{ bait: { ...state.bait, ...{ point: newBait } } },
+          ...{ worm: { ...state.worm, ...{ length, speed } } },
+          ...{ bait: { ...state.bait, ...{ x, y } } },
         }
       }
       else

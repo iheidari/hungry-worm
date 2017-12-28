@@ -12,9 +12,10 @@ export const initApp = () => {
       worm: {
         parts: [{ x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 }],
         direction: { x: 1, y: 0 },
-        speed: 5
+        length: 3,
+        speed: 700
       },
-      bait: { point: { x: 10, y: 10 } }
+      bait: { x: 10, y: 10 }
     }
   };
 }
