@@ -7,12 +7,18 @@ export default (state = {}, action) => {
         ...state, ...{ ...action.store }
       };
     case types.MOVE_WORM:
+      const boardWidth = state.board.width;
+      const boardHeight = state.board.height;
       const sw = state.worm;
       const oldParts = sw.parts;
       let newParts = oldParts.map((p, i) => {
         if (i === oldParts.length - 1) {
           const t = oldParts[oldParts.length - 1];
-          return { x: t.x + sw.direction.x, y: t.y + sw.direction.y };
+          let x = (t.x + sw.direction.x) % boardWidth;
+          let y = (t.y + sw.direction.y) % boardHeight;
+          x += (x < 0) ? boardWidth : 0;
+          y += (y < 0) ? boardHeight : 0;
+          return { x, y };
         }
         else {
           return oldParts[i + 1];
