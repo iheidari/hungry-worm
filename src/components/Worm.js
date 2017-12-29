@@ -13,16 +13,28 @@ class Worm extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    //only update in case of props change
-    //no need to render for this.state.moveCounter changes
-    if (nextProps.speed !== this.props.speed) {
+    //reset speed in case of change
+    if (!nextProps.pause && nextProps.speed !== this.props.speed) {
       clearInterval(this.state.intervalID);
       this.setState({ intervalID: setInterval(this.moveWorm, this.props.speed) });
     }
+    //only update in case of props change
+    //no need to render for this.state.moveCounter changes
     if (nextProps !== this.props)
       return true;
     else
       return false;
+  }
+  componentWillUpdate(nextProps, nextState) {
+    if (this.props.pause !== nextProps.pause) {
+      if (nextProps.pause) {
+        clearInterval(this.state.intervalID);
+      }
+      else {
+        clearInterval(this.state.intervalID);
+        this.setState({ intervalID: setInterval(this.moveWorm, nextProps.speed) });
+      }
+    }
   }
 
   moveWorm() {
@@ -47,7 +59,8 @@ const mapStateToProps = (state) => {
   return {
     size: state.board && state.board.cellSize,
     parts: state.worm && state.worm.parts,
-    speed: (state.worm && state.worm.speed)
+    speed: state.worm && state.worm.speed,
+    pause: state.worm && state.worm.pause,
   };
 }
 

@@ -24,9 +24,10 @@ export default (state = {}, action) => {
       return {
         ...state, ...{ worm: { ...sw, ...{ parts: newParts, moves } } }
       };
-    case types.CHANGE_DIRECTION:
+    case types.KEY_PRESSED:
+      const pause = state.worm.pause ^ action.pause;
       return {
-        ...state, ...{ worm: { ...state.worm, ...{ direction: action.direction } } }
+        ...state, ...{ worm: { ...state.worm, ...{ direction: action.direction || state.worm.direction, pause } } }
       };
     case types.CHECK_EATING:
       const worm = state.worm;

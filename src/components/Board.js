@@ -3,35 +3,38 @@ import { connect } from 'react-redux';
 import Worm from './Worm';
 import Bait from './Bait';
 import Header from './Header';
-import { changeDirection } from '../actions/wormActions';
+import { keyPressed } from '../actions/wormActions';
 
 class Board extends Component {
   constructor() {
     super();
-    document.onkeypress = this.keyPressed.bind(this);
+    document.onkeypress = this.keyPress.bind(this);
   }
 
-  keyPressed(evt) {
+  keyPress(evt) {
     const disp = this.props.dispatch;
     evt = evt || window.event;
     switch (evt.keyCode) {
+      case 27:
+        disp(keyPressed('escape'));
+        break;
       case 37:
-        disp(changeDirection('left'));
+        disp(keyPressed('left'));
         break;
       case 38:
-        disp(changeDirection('up'));
+        disp(keyPressed('up'));
         break;
       case 39:
-        disp(changeDirection('right'));
+        disp(keyPressed('right'));
         break;
       case 40:
-        disp(changeDirection('down'));
+        disp(keyPressed('down'));
         break;
       default:
     }
   }
   changeDir(dir) {
-    this.props.dispatch(changeDirection(dir));
+    this.props.dispatch(keyPressed(dir));
   }
   render() {
     const p = this.props;

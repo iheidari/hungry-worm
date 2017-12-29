@@ -14,7 +14,8 @@ export const initApp = () => {
         direction: { x: 1, y: 0 },
         length: 3,
         speed: 700,
-        moves:0
+        moves: 0,
+        pause: false
       },
       bait: { x: 10, y: 10 }
     }
@@ -33,12 +34,14 @@ export const checkEating = () => {
   };
 };
 
-export const changeDirection = (dir) => {
+export const keyPressed = (key) => {
   let toRet = {
-    type: types.CHANGE_DIRECTION,
-    //direction:{x:,y:}
+    type: types.KEY_PRESSED,
   };
-  switch (dir) {
+  switch (key) {
+    case 'escape':
+      toRet.pause = true;
+      break;
     case 'up':
       toRet.direction = { x: 0, y: -1 };
       break;
