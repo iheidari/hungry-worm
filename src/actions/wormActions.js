@@ -13,7 +13,7 @@ export const initApp = () => {
         parts: [{ x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 }],
         direction: { x: 1, y: 0 },
         length: 3,
-        speed: 700,
+        speed: 200,
         moves: 0,
         pause: false
       },
