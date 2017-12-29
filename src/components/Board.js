@@ -40,7 +40,7 @@ class Board extends Component {
     const p = this.props;
     return (
       <div className="board" style={{ width: p.width, height: p.height }}>
-        <Header width={p.width} />
+        <Header width={p.width} titles = {[{name : 'speed', value : p.speed}, {name : 'bite', value : p.bite}]} />
         <Worm />
         <Bait />
       </div>
@@ -51,7 +51,9 @@ class Board extends Component {
 const mapStateToProps = (state) => {
   return {
     width: state.board && state.board.width * state.board.cellSize,
-    height: state.board && state.board.height * state.board.cellSize
+    height: state.board && state.board.height * state.board.cellSize,
+    speed : state.worm && state.worm.speed,
+    bite : state.worm && state.worm.length,
   }
 }
 export default connect(mapStateToProps)(Board)
