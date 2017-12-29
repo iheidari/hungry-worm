@@ -23,8 +23,6 @@ class Worm extends Component {
       return true;
     else
       return false;
-
-
   }
 
   moveWorm() {

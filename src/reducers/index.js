@@ -8,7 +8,7 @@ export default (state = {}, action) => {
       };
     case types.MOVE_WORM:
       const sw = state.worm;
-      let oldParts = sw.parts;
+      const oldParts = sw.parts;
       let newParts = oldParts.map((p, i) => {
         if (i === oldParts.length - 1) {
           const t = oldParts[oldParts.length - 1];
@@ -20,8 +20,9 @@ export default (state = {}, action) => {
       });
       if (sw.length > oldParts.length)
         newParts = [oldParts[0], ...newParts];
+      const moves = sw.moves + 1;
       return {
-        ...state, ...{ worm: { ...sw, ...{ parts: newParts } } }
+        ...state, ...{ worm: { ...sw, ...{ parts: newParts, moves } } }
       };
     case types.CHANGE_DIRECTION:
       return {
@@ -35,9 +36,8 @@ export default (state = {}, action) => {
       if (wormHead.x === bait.x && wormHead.y === bait.y) {
         let length = worm.length + 1;
         let speed = Math.round(worm.speed * 0.9);
-        const x = Math.round(Math.random() * width);
-        const y = Math.round(Math.random() * height);
-
+        const x = Math.floor(Math.random() * width);
+        const y = Math.floor(Math.random() * height);
         return {
           ...state,
           ...{ worm: { ...state.worm, ...{ length, speed } } },
