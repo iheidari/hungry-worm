@@ -40,7 +40,7 @@ class Board extends Component {
     const p = this.props;
     return (
       <div className="board" style={{ width: p.width, height: p.height }}>
-        <Header width={p.width} titles={[{ name: 'speed', value: p.speed }, { name: 'bite', value: p.bite }]} />
+        <Header width={p.width} titles={[{ name: 'Speed: ', value: p.speed + ' px/min' }, { name: 'Size: ', value: p.bite }]} />
         {p.pause ? (<div className="boardOverlay"><p>press Esc to continue...</p></div>) : null}
         <Worm />
         <Bait />
@@ -51,11 +51,11 @@ class Board extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    width: state.board && state.board.width * state.board.cellSize,
-    height: state.board && state.board.height * state.board.cellSize,
-    speed: state.worm && state.worm.speed,
-    bite: state.worm && state.worm.length,
-    pause: state.worm && state.worm.pause,
+    width: state.board.width * state.board.cellSize,
+    height: state.board.height * state.board.cellSize,
+    speed: (Math.round(60000 / state.worm.speed)),
+    bite: state.worm.length,
+    pause: state.worm.pause,
   }
 }
 export default connect(mapStateToProps)(Board)
