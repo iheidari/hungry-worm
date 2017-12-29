@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Header extends Component {
   titleArray(items) {
     return items.map((t, i) =>
-      <li key={i} style={{ width: '33%' }}>{t.name}{t.value}</li>)
+      <li key={i} style={{ width: (100/items.length)+'%' }}>{t.name}{t.value}</li>)
   };
 
   render() {
