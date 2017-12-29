@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class Header extends Component {
   titleArray(items) {
-    return items.map((t) =>
-      <li> {t.name} : {t.value} </li>)
+    return items.map((t, i) =>
+      <li key={i} style={{ width: '33%' }}>{t.name}{t.value}</li>)
   };
 
   render() {
