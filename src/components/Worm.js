@@ -57,10 +57,10 @@ class Worm extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    size: state.board && state.board.cellSize,
-    parts: state.worm && state.worm.parts,
-    speed: state.worm && state.worm.speed,
-    pause: state.worm && state.worm.pause,
+    size: state.board.cellSize,
+    parts: state.worm.parts,
+    speed: state.worm.speed,
+    pause: state.worm.pause,
   };
 }
 

@@ -16,7 +16,7 @@ class Bait extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    size: state.board && state.board.cellSize,
+    size: state.board.cellSize,
     point: state.bait,
   };
 }
