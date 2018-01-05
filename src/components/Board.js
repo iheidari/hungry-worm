@@ -16,26 +16,24 @@ class Board extends Component {
     evt = evt || window.event;
     switch (evt.keyCode) {
       case 27:
-        disp(keyPressed('escape'));
+        disp(keyPressed('escape', this.props.pause));
         break;
       case 37:
-        disp(keyPressed('left'));
+        disp(keyPressed('left', this.props.pause));
         break;
       case 38:
-        disp(keyPressed('up'));
+        disp(keyPressed('up', this.props.pause));
         break;
       case 39:
-        disp(keyPressed('right'));
+        disp(keyPressed('right', this.props.pause));
         break;
       case 40:
-        disp(keyPressed('down'));
+        disp(keyPressed('down', this.props.pause));
         break;
       default:
     }
   }
-  changeDir(dir) {
-    this.props.dispatch(keyPressed(dir));
-  }
+
   render() {
     const p = this.props;
     return (
@@ -60,7 +58,7 @@ const mapStateToProps = (state) => {
     speed: (Math.round(60000 / state.worm.speed)),
     bite: state.worm.length,
     pause: state.worm.pause,
-    moves: state.worm.moves,
+    moves: state.worm.movesCounter,
   }
 }
 export default connect(mapStateToProps)(Board)
