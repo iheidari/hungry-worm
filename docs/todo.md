@@ -3,7 +3,7 @@
   * one system
   * online
   * online streaming
-* score system
+* score system(define a system to how pointing will works)
 * high scores
 * better movement(more animation)
 * part type (different shape for worm and bait)

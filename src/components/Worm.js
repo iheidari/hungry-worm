@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Part from './Part';
-import { moveWorm, checkEating } from '../actions/wormActions';
+import { WormMotion } from '../actions/wormActions';
 
 class Worm extends Component {
   constructor() {
     super();
-    this.moveWorm = this.moveWorm.bind(this);
+    this.move = this.move.bind(this);
   }
   componentDidMount() {
-    this.setState({ intervalID: setInterval(this.moveWorm, this.props.speed) });
+    this.setState({ intervalID: setInterval(this.move, this.props.speed) });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     //reset speed in case of change
     if (!nextProps.pause && nextProps.speed !== this.props.speed) {
       clearInterval(this.state.intervalID);
-      this.setState({ intervalID: setInterval(this.moveWorm, this.props.speed) });
+      this.setState({ intervalID: setInterval(this.move, this.props.speed) });
     }
     //only update in case of props change
     //no need to render for this.state.moveCounter changes
@@ -32,15 +32,15 @@ class Worm extends Component {
       }
       else {
         clearInterval(this.state.intervalID);
-        this.setState({ intervalID: setInterval(this.moveWorm, nextProps.speed) });
+        this.setState({ intervalID: setInterval(this.move, nextProps.speed) });
       }
     }
   }
 
-  moveWorm() {
+  move() {
     const p = this.props;
-    p.dispatch(moveWorm());
-    p.dispatch(checkEating());
+    p.WormMotion();
+    //p.dispatch(checkEating());
   }
   render() {
     const p = this.props;
@@ -60,6 +60,12 @@ class Worm extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    WormMotion: () => dispatch(WormMotion())
+  }
+}
+
 const mapStateToProps = (state) => {
   return {
     size: state.board.cellSize,
@@ -70,4 +76,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps)(Worm);
+export default connect(mapStateToProps, mapDispatchToProps)(Worm);
