@@ -1,16 +1,17 @@
 import React from 'react';
 class Part extends React.Component {
   render() {
-    const size = this.props.size;
+    const p = this.props;
+    const size =p.size;
     const divStyle = {
-      left: size * this.props.x ,
-      top: size * this.props.y ,
+      left: size * p.x ,
+      top: size * p.y ,
       width: size,
       height: size,
-      background: 'blueviolet'
+
     };
     return (
-      <div style={divStyle}></div>
+      <div style={{...divStyle, ...p.type } }></div>
     );
   };
 }

@@ -1,4 +1,7 @@
 import * as types from '../constants/actionTypes';
+import head from '../img/head.png';
+import tail from '../img/tail.png';
+import body from '../img/body.png';
 
 export const initApp = () => {
   return {
@@ -15,9 +18,17 @@ export const initApp = () => {
         length: 3,
         speed: 200,
         moves: 0,
-        pause: false
+        pause: false,
+        type: {
+          head: { backgroundImage: `url(${head})`, backgroundSize: 'contain' },
+          tail: { backgroundImage: `url(${tail})`, backgroundSize: 'contain' },
+          body: { backgroundImage: `url(${body})`, backgroundSize: 'contain' }
+        }
       },
-      bait: { x: 10, y: 10 }
+      bait: {
+        x: 10, y: 10,
+        type: { backgroundColor: 'blue' }
+      }
     }
   };
 }
