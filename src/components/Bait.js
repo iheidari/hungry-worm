@@ -8,7 +8,7 @@ class Bait extends Component {
     if(!p.point) return null;
     return (
       <div>
-        <Part x={p.point.x} y={p.point.y} size={p.size}/>
+        <Part x={p.point.x} y={p.point.y} size={p.size} type={p.type}/>
       </div>
     );
   }
@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
   return {
     size: state.board.cellSize,
     point: state.bait,
+    type: state.bait.type
   };
 }
 

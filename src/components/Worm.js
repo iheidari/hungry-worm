@@ -46,7 +46,12 @@ class Worm extends Component {
     const p = this.props;
     if (!p.parts) return null;
     let wormParts = p.parts.map((part, index) => {
-      return (<Part id={'id' + index} x={part.x} y={part.y} size={p.size} key={index} />);
+      if (index === 0 )
+      return (<Part id={'id' + index} x={part.x} y={part.y} size={p.size} key={index} type={p.type.tail}/>);
+      else if (index === part.length-1)
+      return (<Part id={'id' + index} x={part.x} y={part.y} size={p.size} key={index} type={p.type.head}/>);
+      else
+      return (<Part id={'id' + index} x={part.x} y={part.y} size={p.size} key={index} type={p.type.body}/>);
     });
     return (
       <div>
@@ -67,6 +72,7 @@ const mapStateToProps = (state) => {
     parts: state.worm.parts,
     speed: state.worm.speed,
     pause: state.worm.pause,
+    type: state.worm.type
   };
 }
 
